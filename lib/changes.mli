@@ -39,6 +39,9 @@ module Release : sig
   }
 
   val to_string : t -> string
+
+  val pp_date : (int * int * int, string) Result.result Fmt.t
+  val pp_header : t Fmt.t
 end
 
 type t = Release.t list
@@ -48,3 +51,5 @@ val of_string : string -> (t, string) Result.result
 val of_channel : in_channel -> (t, string) Result.result
 
 val to_string : t -> string
+
+val pp : ?sep:unit Fmt.t -> t Fmt.t

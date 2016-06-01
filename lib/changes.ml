@@ -68,6 +68,16 @@ module Release = struct
     Printf.sprintf "%s (%s):\n%s\n"
       version (string_of_date date)
       (String.concat "\n\n" (List.map Section.to_string sections))
+
+  let pp_date ppf date =
+    let open Fmt in
+    result ppf date
+      ~error:string
+      ~ok:(fun ppf (y,m,d) ->
+        pf ppf "%04d%c%02d%c%02d" y default_date_sep m default_date_sep d)
+
+  let pp_header ppf {version; date;_} =
+    Fmt.(pf ppf "%s (%a)" version pp_date date)
 end
 
 type t = Release.t list
@@ -270,3 +280,6 @@ let of_channel = of_ MParser.parse_channel
 
 let to_string changelog =
   String.concat "\n" (List.map Release.to_string changelog)
+
+let pp ?(sep=Fmt.cut) ppf changelog =
+  Fmt.(list ~sep Release.pp_header ppf changelog)
