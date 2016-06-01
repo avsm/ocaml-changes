@@ -3,6 +3,7 @@ name: "changes"
 version: "0.1.0"
 maintainer: "sheets@alum.mit.edu"
 authors: ["David Sheets"]
+tags: "flags:plugin"
 homepage: "https://github.com/dsheets/ocaml-changes"
 bug-reports: "https://github.com/dsheets/ocaml-changes/issues"
 dev-repo: "https://github.com/dsheets/ocaml-changes.git"
@@ -21,4 +22,7 @@ depends: [
   "result"
   "mparser"
   "astring"
+  "cmdliner"
+  "fmt"
+  "rresult"
 ]
